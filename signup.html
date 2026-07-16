@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>10X CRM - Login</title>
+  <title>10X CRM - Sign Up</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -11,42 +11,61 @@
   <div class="auth-container">
     <div class="auth-card">
 
-      <h1>Welcome back</h1>
+      <h1>Create your account</h1>
 
-      <form id="loginForm">
+      <form id="signupForm">
+
+        <input
+          type="text"
+          id="fullName"
+          placeholder="Full Name"
+        >
+        <p id="fullNameError" class="error"></p>
 
         <input
           type="email"
           id="email"
           placeholder="Email"
         >
-
         <p id="emailError" class="error"></p>
+
+        <input
+          type="text"
+          id="company"
+          placeholder="Company (optional)"
+        >
+        <p id="companyError" class="error"></p>
 
         <input
           type="password"
           id="password"
           placeholder="Password"
         >
-
         <p id="passwordError" class="error"></p>
 
+        <input
+          type="password"
+          id="confirmPassword"
+          placeholder="Confirm Password"
+        >
+        <p id="confirmPasswordError" class="error"></p>
+
         <button type="submit">
-          Log In
+          Create Account
         </button>
 
       </form>
 
       <p class="auth-link">
-        Don't have an account?
-        <a href="signup.html">Sign up</a>
+        Already have an account?
+        <a href="index.html">Log In</a>
       </p>
 
     </div>
   </div>
 
-  <script src="js/login.js"></script>
   <script src="js/storage.js"></script>
+  <script src="js/signup.js"></script>
 
 </body>
 </html>
