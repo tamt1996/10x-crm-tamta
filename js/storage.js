@@ -1,5 +1,5 @@
-console.log("STORAGE JS WORKING");
-
+// Helper functions to manage CRM data in LocalStorage.
+// Provides fallback to initial state if no data exists.
 
 // ================= USERS =================
 
