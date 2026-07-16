@@ -1,4 +1,5 @@
-
+// Route Guard: Checks user authentication before rendering the page.
+// Prevents unauthorized users from accessing protected dashboard routes.
 console.log("GUARD JS WORKING");
 
 
