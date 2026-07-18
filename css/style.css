@@ -409,6 +409,12 @@ body.dark p{
   gap:20px;
   margin:25px 0;
 }
+#clock{
+    font-size:14px;
+    color:#6b7280;
+    font-weight:500;
+    margin-bottom:20px;
+}
 
 /* =========================
    RESPONSIVE
