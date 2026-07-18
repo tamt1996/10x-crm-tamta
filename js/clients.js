@@ -444,8 +444,7 @@ if (clientsContainer) {
         saveAndSyncState();
         renderClients();
 
-        showClientsToast("Client deleted", "success");
-
+       showClientsToast("Client successfully deleted ✓", "success");
       } catch (err) {
         showClientsToast("Failed to complete server deletion request.", "error");
       }
