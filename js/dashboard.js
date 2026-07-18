@@ -92,9 +92,12 @@ if (wonRevenue) {
         0
       );
 
-  wonRevenue.textContent =
-    "$" + revenue;
-}
+const formattedRevenue =
+  revenue.toLocaleString();
+
+wonRevenue.textContent =
+  "$" + formattedRevenue;
+    }
 
 // ================= NEW THIS WEEK =================
 
