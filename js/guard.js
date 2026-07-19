@@ -29,8 +29,10 @@ const publicPages = [
 
 // მიმდინარე ფაილის სახელი
 const currentPage =
-window.location.pathname.split("/").pop();
-
+window.location.pathname
+    .split("/")
+    .pop()
+    .toLowerCase();
 
 
 // ===============================
