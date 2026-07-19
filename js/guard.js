@@ -3,8 +3,13 @@
 console.log("GUARD JS WORKING");
 
 
+const storedSession =
+localStorage.getItem("crm_session");
+
 const session =
-JSON.parse(localStorage.getItem("crm_session"));
+storedSession
+    ? JSON.parse(storedSession)
+    : null;
 
 
 // დაცული გვერდები
