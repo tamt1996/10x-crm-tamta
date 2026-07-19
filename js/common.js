@@ -1,5 +1,7 @@
 console.log("COMMON JS WORKING");
 
+const TOAST_DURATION = 3000;
+
 // ================= TOAST =================
 
 function showToast(message, type = "success") {
@@ -20,7 +22,7 @@ function showToast(message, type = "success") {
 
     setTimeout(() => {
         toast.remove();
-    }, 3000);
+    }, TOAST_DURATION);
 
 }
 
