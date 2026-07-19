@@ -1,10 +1,16 @@
 console.log("AUTH JS WORKING");
 
 function logout() {
-  localStorage.removeItem("crm_session");
+
+  const sessionExists =
+    localStorage.getItem("crm_session");
+
+  if (sessionExists) {
+    localStorage.removeItem("crm_session");
+  }
+
   window.location.href = "index.html";
 }
-
 const logoutBtn = document.getElementById("logoutBtn");
 
 if (logoutBtn) {
