@@ -24,6 +24,7 @@ function saveUsers(users){
 
 
 // ================= SESSION =================
+// Returns current authenticated session
 
 function getSession(){
 
