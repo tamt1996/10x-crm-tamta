@@ -1,5 +1,5 @@
-// Helper functions to manage CRM data in LocalStorage.
-// Provides fallback to initial state if no data exists.
+// Storage layer for CRM application.
+// Handles users, sessions, clients and theme persistence.
 
 // ================= USERS =================
 
