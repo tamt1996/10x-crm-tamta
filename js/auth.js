@@ -11,8 +11,14 @@ function logout() {
 
   window.location.href = "index.html";
 }
-const logoutBtn = document.getElementById("logoutBtn");
+const logoutBtn =
+  document.getElementById("logoutBtn");
 
-if (logoutBtn) {
-  logoutBtn.addEventListener("click", logout);
+if (!logoutBtn) {
+  console.log("Logout button not found");
+} else {
+  logoutBtn.addEventListener(
+    "click",
+    logout
+  );
 }
