@@ -99,7 +99,7 @@ function getTheme(){
 }
 
 
-
+// Persists selected theme preference
 function saveTheme(theme){
 
     localStorage.setItem(
