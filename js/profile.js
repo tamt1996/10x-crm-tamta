@@ -107,10 +107,12 @@ function updateProfileUI() {
     profileInitials.textContent = getInitials(currentUser.fullName);
   }
   
-  if (profileDate && currentUser.createdAt) {
-    const creationDate = new Date(currentUser.createdAt);
-    profileDate.textContent = `Member since ${creationDate.toLocaleDateString()}`;
-  }
+ if (profileDate && currentUser.createdAt) {
+  const creationDate = new Date(currentUser.createdAt);
+
+  profileDate.textContent =
+    `Member since ${creationDate.toLocaleDateString("en-US")}`;
+}
 
   // ფორმის ველების შევსება საწყისი მნიშვნელობებით
   document.getElementById("fullName").value = currentUser.fullName;
