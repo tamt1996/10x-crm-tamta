@@ -388,8 +388,26 @@ body.dark .dashboard-header nav a{
 
 body.dark .crm-card,
 body.dark .client-card{
-    background:#1f2937;
-    color:white;
+    background:#243244;
+    color:#f8fafc;
+    border:1px solid #334155;
+}
+body.dark .crm-card h3,
+body.dark .client-card h3{
+    color:#ffffff;
+}
+
+body.dark .crm-card p,
+body.dark .client-card p{
+    color:#cbd5e1;
+}
+
+body.dark #clock{
+    color:#94a3b8;
+}
+
+body.dark .dashboard-container h2{
+    color:#ffffff;
 }
 
 body.dark input,
