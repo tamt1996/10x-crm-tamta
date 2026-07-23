@@ -1,5 +1,29 @@
 console.log("AUTH JS WORKING");
+console.log("AUTH JS WORKING");
 
+const demoUser = {
+  id: 999999,
+  fullName: "Demo User",
+  email: "demo@crm.com",
+  password: "Demo1234",
+  company: "Demo Company",
+  createdAt: new Date().toISOString()
+};
+
+let users = JSON.parse(localStorage.getItem("crm_users")) || [];
+
+const demoExists = users.some(
+  user => user.email === demoUser.email
+);
+
+if (!demoExists) {
+  users.push(demoUser);
+
+  localStorage.setItem(
+    "crm_users",
+    JSON.stringify(users)
+  );
+}
 function logout() {
 
   const sessionExists =
