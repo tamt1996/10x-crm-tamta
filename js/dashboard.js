@@ -2,9 +2,11 @@ console.log("DASHBOARD JS WORKING");
 
 // ================= DATA =================
 
-const clients =
-  JSON.parse(localStorage.getItem("crm_clients")) || [];
+function getClients() {
+  return JSON.parse(localStorage.getItem("crm_clients")) || [];
+}
 
+let clients = getClients();
 const users =
   JSON.parse(localStorage.getItem("crm_users")) || [];
 
