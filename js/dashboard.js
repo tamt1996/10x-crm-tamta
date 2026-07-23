@@ -1,261 +1,321 @@
 console.log("DASHBOARD JS WORKING");
 
 
-// ================= DATA =================
+(() => {
 
-function getClients() {
-  return JSON.parse(localStorage.getItem("crm_clients")) || [];
-}
+  // ================= DATA =================
 
-function getUsers() {
-  return JSON.parse(localStorage.getItem("crm_users")) || [];
-}
-
-
-let clients = getClients();
-
-console.log("DASHBOARD CLIENTS:", clients.length);
-
-const users = getUsers();
-
-const currentSession =
-  JSON.parse(localStorage.getItem("crm_session"));
-
-
-// ================= USER NAME =================
-
-const userName =
-  document.getElementById("userName");
-
-if (currentSession) {
-
-  const user = users.find(
-    user => user.id === currentSession.userId
-  );
-
-  if (user && userName) {
-
-    const firstName =
-      user.fullName.split(" ")[0];
-
-    userName.textContent = firstName;
+  function getDashboardClients() {
+    return JSON.parse(localStorage.getItem("crm_clients")) || [];
   }
-}
 
 
-// ================= CLOCK =================
-
-function updateClock() {
-
-  const clock =
-    document.getElementById("clock");
-
-  if (!clock) return;
-
-  const now = new Date();
-
-  clock.textContent =
-    `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
-}
-
-updateClock();
-
-setInterval(updateClock, 1000);
+  function getDashboardUsers() {
+    return JSON.parse(localStorage.getItem("crm_users")) || [];
+  }
 
 
-// ================= DASHBOARD UPDATE =================
-
-function updateDashboard() {
-
-  clients = getClients();
+  let dashboardClients = getDashboardClients();
 
   console.log(
-    "UPDATED CLIENTS:",
-    clients.length
+    "DASHBOARD CLIENTS:",
+    dashboardClients.length
   );
 
 
-  // TOTAL CLIENTS
+  const dashboardUsers = getDashboardUsers();
 
-  const totalClients =
-    document.getElementById("totalClients");
-
-  if (totalClients) {
-
-    totalClients.textContent =
-      clients.length;
-  }
+  const dashboardSession =
+    JSON.parse(localStorage.getItem("crm_session"));
 
 
 
-  // ACTIVE DEALS
+  // ================= USER NAME =================
 
-  const activeDeals =
-    document.getElementById("activeDeals");
-
-  if (activeDeals) {
-
-    const activeCount =
-      clients.filter(
-        client =>
-          client.status === "Lead" ||
-          client.status === "Contacted"
-      ).length;
-
-    activeDeals.textContent =
-      activeCount;
-  }
+  const userNameElement =
+    document.getElementById("userName");
 
 
+  if (dashboardSession) {
 
-  // WON REVENUE
-
-  const wonRevenue =
-    document.getElementById("wonRevenue");
-
-
-  if (wonRevenue) {
-
-    const revenue =
-      clients
-        .filter(
-          client =>
-            client.status === "Won"
-        )
-        .reduce(
-          (sum, client) =>
-            sum + (client.dealValue || 0),
-          0
-        );
-
-
-    wonRevenue.textContent =
-      "$" + revenue.toLocaleString();
-
-  }
-
-
-
-  // NEW THIS WEEK
-
-  const newThisWeek =
-    document.getElementById("newThisWeek");
-
-
-  if (newThisWeek) {
-
-    const weekAgo = new Date();
-
-    weekAgo.setDate(
-      weekAgo.getDate() - 7
-    );
-
-
-    const recentClients =
-      clients.filter(client =>
-        client.createdAt &&
-        new Date(client.createdAt) > weekAgo
+    const currentUser =
+      dashboardUsers.find(
+        user =>
+          user.id === dashboardSession.userId
       );
 
 
-    newThisWeek.textContent =
-      recentClients.length;
-  }
+    if (currentUser && userNameElement) {
 
+      const firstName =
+        currentUser.fullName.split(" ")[0];
 
-
-  // PIPELINE
-
-  const pipelineOverview =
-    document.getElementById(
-      "pipelineOverview"
-    );
-
-
-  if (pipelineOverview) {
-
-    const leadCount =
-      clients.filter(
-        client => client.status === "Lead"
-      ).length;
-
-
-    const contactedCount =
-      clients.filter(
-        client => client.status === "Contacted"
-      ).length;
-
-
-    const wonCount =
-      clients.filter(
-        client => client.status === "Won"
-      ).length;
-
-
-    const lostCount =
-      clients.filter(
-        client => client.status === "Lost"
-      ).length;
-
-
-
-    pipelineOverview.innerHTML = `
-      <p>Leads: ${leadCount}</p>
-      <p>Contacted: ${contactedCount}</p>
-      <p>Won: ${wonCount}</p>
-      <p>Lost: ${lostCount}</p>
-      <p>Total: ${clients.length}</p>
-    `;
-  }
-
-
-
-  // RECENT CLIENTS
-
-  const recentClientsBox =
-    document.getElementById(
-      "recentClients"
-    );
-
-
-  if (recentClientsBox) {
-
-    const latestClients =
-      [...clients]
-        .sort(
-          (a,b) =>
-            new Date(b.createdAt) -
-            new Date(a.createdAt)
-        )
-        .slice(0,5);
-
-
-    if (latestClients.length === 0) {
-
-      recentClientsBox.innerHTML =
-        "<p>No clients yet.</p>";
-
-    } else {
-
-      recentClientsBox.innerHTML =
-        latestClients
-          .map(
-            client => `
-              <p>
-                ${client.name}
-                (${client.company})
-              </p>
-            `
-          )
-          .join("");
+      userNameElement.textContent =
+        firstName;
     }
   }
 
-}
 
 
-// run after page load
-window.addEventListener(
-  "load",
-  updateDashboard
-);
+  // ================= CLOCK =================
+
+  function updateDashboardClock() {
+
+    const clockElement =
+      document.getElementById("clock");
+
+
+    if (!clockElement) return;
+
+
+    const now = new Date();
+
+
+    clockElement.textContent =
+      `${now.toLocaleDateString()} ${now.toLocaleTimeString()}`;
+  }
+
+
+  updateDashboardClock();
+
+  setInterval(updateDashboardClock, 1000);
+
+
+
+
+  // ================= UPDATE DASHBOARD =================
+
+  function updateDashboard() {
+
+
+    dashboardClients =
+      getDashboardClients();
+
+
+    console.log(
+      "UPDATED CLIENTS:",
+      dashboardClients.length
+    );
+
+
+
+    // TOTAL CLIENTS
+
+    const totalClientsElement =
+      document.getElementById("totalClients");
+
+
+    if (totalClientsElement) {
+
+      totalClientsElement.textContent =
+        dashboardClients.length;
+    }
+
+
+
+    // ACTIVE DEALS
+
+    const activeDealsElement =
+      document.getElementById("activeDeals");
+
+
+    if (activeDealsElement) {
+
+
+      const activeDealsCount =
+        dashboardClients.filter(
+          client =>
+            client.status === "Lead" ||
+            client.status === "Contacted"
+        ).length;
+
+
+      activeDealsElement.textContent =
+        activeDealsCount;
+    }
+
+
+
+
+    // WON REVENUE
+
+    const wonRevenueElement =
+      document.getElementById("wonRevenue");
+
+
+    if (wonRevenueElement) {
+
+
+      const revenue =
+        dashboardClients
+          .filter(
+            client =>
+              client.status === "Won"
+          )
+          .reduce(
+            (sum, client) =>
+              sum + (client.dealValue || 0),
+            0
+          );
+
+
+      wonRevenueElement.textContent =
+        "$" + revenue.toLocaleString();
+
+    }
+
+
+
+
+    // NEW THIS WEEK
+
+    const newThisWeekElement =
+      document.getElementById("newThisWeek");
+
+
+    if (newThisWeekElement) {
+
+
+      const weekAgo =
+        new Date();
+
+
+      weekAgo.setDate(
+        weekAgo.getDate() - 7
+      );
+
+
+      const recentClients =
+        dashboardClients.filter(
+          client =>
+            client.createdAt &&
+            new Date(client.createdAt) > weekAgo
+        );
+
+
+      newThisWeekElement.textContent =
+        recentClients.length;
+
+    }
+
+
+
+
+
+    // PIPELINE
+
+    const pipelineElement =
+      document.getElementById(
+        "pipelineOverview"
+      );
+
+
+    if (pipelineElement) {
+
+
+      const leads =
+        dashboardClients.filter(
+          client =>
+            client.status === "Lead"
+        ).length;
+
+
+      const contacted =
+        dashboardClients.filter(
+          client =>
+            client.status === "Contacted"
+        ).length;
+
+
+      const won =
+        dashboardClients.filter(
+          client =>
+            client.status === "Won"
+        ).length;
+
+
+      const lost =
+        dashboardClients.filter(
+          client =>
+            client.status === "Lost"
+        ).length;
+
+
+
+      pipelineElement.innerHTML = `
+
+        <p>Leads: ${leads}</p>
+
+        <p>Contacted: ${contacted}</p>
+
+        <p>Won: ${won}</p>
+
+        <p>Lost: ${lost}</p>
+
+        <p>Total: ${dashboardClients.length}</p>
+
+      `;
+    }
+
+
+
+
+
+    // RECENT CLIENTS
+
+    const recentClientsElement =
+      document.getElementById(
+        "recentClients"
+      );
+
+
+    if (recentClientsElement) {
+
+
+      const latestClients =
+        [...dashboardClients]
+          .sort(
+            (a,b) =>
+              new Date(b.createdAt) -
+              new Date(a.createdAt)
+          )
+          .slice(0,5);
+
+
+
+      if (latestClients.length === 0) {
+
+
+        recentClientsElement.innerHTML =
+          "<p>No clients yet.</p>";
+
+
+      } else {
+
+
+        recentClientsElement.innerHTML =
+          latestClients
+            .map(
+              client => `
+                <p>
+                  ${client.name}
+                  (${client.company})
+                </p>
+              `
+            )
+            .join("");
+
+      }
+    }
+
+  }
+
+
+
+  window.addEventListener(
+    "load",
+    updateDashboard
+  );
+
+
+})();
