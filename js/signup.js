@@ -1,5 +1,28 @@
 console.log("SIGNUP JS WORKING");
+// Demo Account
+const demoUser = {
+  id: 999999,
+  fullName: "Demo User",
+  email: "demo@crm.com",
+  password: "Demo1234",
+  company: "Demo Company",
+  createdAt: new Date().toISOString()
+};
 
+let existingUsers =
+  JSON.parse(localStorage.getItem("crm_users")) || [];
+
+const demoExists =
+  existingUsers.some(user => user.email === demoUser.email);
+
+if (!demoExists) {
+  existingUsers.push(demoUser);
+
+  localStorage.setItem(
+    "crm_users",
+    JSON.stringify(existingUsers)
+  );
+}
 const signupForm = document.getElementById("signupForm");
 
 const fullNameInput = document.getElementById("fullName");
